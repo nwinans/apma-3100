@@ -10,4 +10,4 @@ for a in classes:
                         if a is not d and b is not d and c is not d:
                             count = count + 1
 
-print("There are " + count + " class schedule possibilities")
+print("There are " + str(count) + " class schedule possibilities")
