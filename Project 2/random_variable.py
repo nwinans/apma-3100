@@ -4,6 +4,7 @@ dial_time = 6
 busy_signal_time = 3
 not_there_time = 25
 
+# return value is a tuple where the first value is if someone picked up and the second value is the ring time 
 def ring_time(r_num):
     ring_time = dial_time # always have to dial 
     
@@ -16,14 +17,14 @@ def ring_time(r_num):
         if r_num >= (1-0.1245): # someone is available but they didn't pick up
             ring_time += 25 # time for rings
         else:
-            return (True, ring_time - 12 * ln(1 - r_num)) # exponential probability (P = 1 - exp(-lambda*t)) solved for t
+            return (True, ring_time - 12 * ln(1 - r_num)) # exponential probability (P = 1 - exp(-lambda*t)) solved for t, added to the ring_time
 
     ring_time += 1 # hang up time
-    return (False, ring_time)
+    return (False, ring_time) # no one picked up, return that and the ring time
 
-
-print(ring_time(.99))
-print(ring_time(.8))
-print(ring_time(.93775))
-print(ring_time(.93774))
-print(ring_time(.5))
+#tests
+print(ring_time(.99)) # no one answers
+print(ring_time(.8)) # someone answers
+print(ring_time(.93775)) # 5 rings
+print(ring_time(.93774)) # just less than 5 rings
+print(ring_time(.5)) # no one is available to answer
