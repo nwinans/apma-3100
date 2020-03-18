@@ -62,3 +62,8 @@ print("Mean: " + str(totalTime/1000))
 print("First Quartile: " + str(time_list[249]))
 print("Median: " + str(time_list[499]))
 print("Third Quartile: " + str(time_list[749]))
+
+for i in range(0, 1000):
+    if time_list[i] > 15:
+        print((i + 1)/ 1000)
+        break
