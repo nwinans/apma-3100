@@ -53,18 +53,18 @@ def call():
 
     return total_time
 
-for _ in range(0, 1000):
+for _ in range(0, realizations):
     call()
 
 time_list = sorted(time_list)
 
-print("Mean: " + str(totalTime/1000))
+print("Mean: " + str(totalTime/realizations))
 print("First Quartile: " + str(time_list[249]))
 print("Median: " + str(time_list[499]))
 print("Third Quartile: " + str(time_list[749]))
 
 count = 0
-for i in range(0, 1000):
+for i in range(0, realizations):
     if time_list[i] > 15:
-        print("P[W<=15]: " + str(i/1000))
+        print("P[W<=15]: " + str(i/realizations))
         break
