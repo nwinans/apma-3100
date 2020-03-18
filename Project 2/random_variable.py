@@ -40,7 +40,7 @@ def ring_time(r_num):
 def call():
     total_time = 0
     global r_var
-    for i in range (0, 5):
+    for i in range (0, 4):
         c = ring_time(u_i(r_var))
         r_var += 1
         total_time += c[1]
