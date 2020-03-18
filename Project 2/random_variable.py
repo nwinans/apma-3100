@@ -1,15 +1,16 @@
 from math import log as ln
 
+dial_time = 6
+busy_signal_time = 3
+not_there_time = 25
+
 def x_i(i):
     if(i == 0):
         return 1000
     return (24693*x_i(i-1)+3517)%(2**15)
+
 def u_i(i):
     return x_i(i)/(2**15)
-
-dial_time = 6
-busy_signal_time = 3
-not_there_time = 25
 
 # return value is a tuple where the first value is if someone picked up and the second value is the ring time 
 def ring_time(r_num):
@@ -22,7 +23,7 @@ def ring_time(r_num):
     else: # someone is available to answer
         r_num = (r_num - 0.5) * 2 # recalibrate variable, but keep it between 0 and 1
         if r_num >= (1-0.1245): # someone is available but they didn't pick up
-            ring_time += 25 # time for rings
+            ring_time += not_there_time # time for rings
         else:
             return (True, ring_time - 12 * ln(1 - r_num)) # exponential probability (P = 1 - exp(-lambda*t)) solved for t, added to the ring_time
 
@@ -35,3 +36,4 @@ print(ring_time(.8)) # someone answers
 print(ring_time(.93775)) # 5 rings
 print(ring_time(.93774)) # just less than 5 rings
 print(ring_time(.5)) # no one is available to answer
+print(ring_time(.1)) # busy signal
