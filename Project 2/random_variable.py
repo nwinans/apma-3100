@@ -59,9 +59,9 @@ for _ in range(0, realizations):
 time_list = sorted(time_list)
 
 print("Mean: " + str(totalTime/realizations))
-print("First Quartile: " + str(time_list[249]))
-print("Median: " + str(time_list[499]))
-print("Third Quartile: " + str(time_list[749]))
+print("First Quartile: " + str(time_list[int((realizations/4) - 1)]))
+print("Median: " + str(time_list[int((realizations/2) - 1)]))
+print("Third Quartile: " + str(time_list[int((3*realizations/4) - 1)]))
 
 count = 0
 for i in range(0, realizations):
