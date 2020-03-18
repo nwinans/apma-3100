@@ -66,5 +66,5 @@ print("Third Quartile: " + str(time_list[749]))
 count = 0
 for i in range(0, 1000):
     if time_list[i] > 15:
-        print("<15: " + str(i/1000))
+        print("P[W<=15]: " + str(i/1000))
         break
