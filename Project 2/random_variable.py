@@ -11,6 +11,7 @@ average_ring_time = 15.15
 realizations = 1000
 r_var = 1
 totalTime = 0
+time_list = []
 
 def x_i(i):
     if(i == 0):
@@ -40,16 +41,24 @@ def ring_time(r_num):
 
 def call():
     total_time = 0
-    global r_var, totalTime
+    global r_var, totalTime, time_list
     for i in range (0, 4):
         c = ring_time(u_i(r_var))
         r_var += 1
         total_time += c[1]
         if c[0] is True:
             break
+    time_list.append(total_time)
     totalTime += total_time
+
     return total_time
 
 for _ in range(0, 1000):
-    print(call())
+    call()
+
+time_list = sorted(time_list)
+
 print("Mean: " + str(totalTime/1000))
+print("First Quartile: " + str(time_list[249]))
+print("Median: " + str(time_list[499]))
+print("Third Quartile: " + str(time_list[749]))
