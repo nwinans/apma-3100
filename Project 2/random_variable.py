@@ -10,6 +10,7 @@ hang_up_time = 1.32
 average_ring_time = 15.15
 realizations = 1000
 r_var = 1
+totalTime = 0
 
 def x_i(i):
     if(i == 0):
@@ -39,7 +40,7 @@ def ring_time(r_num):
 
 def call():
     total_time = 0
-    global r_var
+    global r_var, totalTime
     for i in range (0, 4):
         c = ring_time(u_i(r_var))
         r_var += 1
@@ -47,7 +48,9 @@ def call():
         if c[0] is True:
             print(str(i + 1) + " calls")
             break
+    totalTime += total_time
     return total_time
 
 for _ in range(0, 1000):
     print(call())
+print("Mean: " + str(totalTime/1000))
