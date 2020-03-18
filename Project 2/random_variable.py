@@ -65,5 +65,5 @@ print("Third Quartile: " + str(time_list[749]))
 
 for i in range(0, 1000):
     if time_list[i] > 15:
-        print((i + 1)/ 1000)
+        print(i/1000)
         break
