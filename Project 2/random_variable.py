@@ -1,8 +1,15 @@
 from math import log as ln
+import sys
 
-dial_time = 6
-busy_signal_time = 3
-not_there_time = 25
+sys.setrecursionlimit(10000)
+
+dial_time = 7.626
+busy_signal_time = 4.365
+not_there_time = 35.4
+hang_up_time = 1.32
+average_ring_time = 15.15
+realizations = 1000
+r_var = 1
 
 def x_i(i):
     if(i == 0):
@@ -25,15 +32,22 @@ def ring_time(r_num):
         if r_num >= (1-0.1245): # someone is available but they didn't pick up
             ring_time += not_there_time # time for rings
         else:
-            return (True, ring_time - 12 * ln(1 - r_num)) # exponential probability (P = 1 - exp(-lambda*t)) solved for t, added to the ring_time
+            return (True, ring_time - (average_ring_time * ln(1 - r_num))) # exponential probability (P = 1 - exp(-lambda*t)) solved for t, added to the ring_time
 
     ring_time += 1 # hang up time
     return (False, ring_time) # no one picked up, return that and the ring time
 
-#tests
-print(ring_time(.99)) # no one answers
-print(ring_time(.8)) # someone answers
-print(ring_time(.93775)) # 5 rings
-print(ring_time(.93774)) # just less than 5 rings
-print(ring_time(.5)) # no one is available to answer
-print(ring_time(.1)) # busy signal
+def call():
+    total_time = 0
+    global r_var
+    for i in range (0, 5):
+        c = ring_time(u_i(r_var))
+        r_var += 1
+        total_time += c[1]
+        if c[0] is True:
+            print(str(i + 1) + " calls")
+            break
+    return total_time
+
+for _ in range(0, 1000):
+    print(call())
