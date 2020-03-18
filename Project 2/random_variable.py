@@ -46,7 +46,6 @@ def call():
         r_var += 1
         total_time += c[1]
         if c[0] is True:
-            print(str(i + 1) + " calls")
             break
     totalTime += total_time
     return total_time
