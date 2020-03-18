@@ -1,5 +1,12 @@
 from math import log as ln
 
+def x_i(i):
+    if(i == 0):
+        return 1000
+    return (24693*x_i(i-1)+3517)%(2**15)
+def u_i(i):
+    return x_i(i)/(2**15)
+
 dial_time = 6
 busy_signal_time = 3
 not_there_time = 25
