@@ -63,7 +63,8 @@ print("First Quartile: " + str(time_list[249]))
 print("Median: " + str(time_list[499]))
 print("Third Quartile: " + str(time_list[749]))
 
+count = 0
 for i in range(0, 1000):
     if time_list[i] > 15:
-        print(i/1000)
+        print("<15: " + str(i/1000))
         break
