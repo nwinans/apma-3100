@@ -1,4 +1,6 @@
 from math import log as ln
+import matplotlib.pyplot as plt
+import numpy as np
 import sys
 
 sys.setrecursionlimit(10000)
@@ -12,6 +14,7 @@ realizations = 1000
 r_var = 1
 totalTime = 0
 time_list = []
+cdf_pts = [(0, 0)]
 
 def x_i(i):
     if(i == 0):
@@ -42,7 +45,7 @@ def ring_time(r_num):
 def call():
     total_time = 0
     global r_var, totalTime, time_list
-    for i in range (0, 4):
+    for _ in range (0, 4):
         c = ring_time(u_i(r_var))
         r_var += 1
         total_time += c[1]
@@ -63,8 +66,58 @@ print("First Quartile: " + str(time_list[int((realizations/4) - 1)]))
 print("Median: " + str(time_list[int((realizations/2) - 1)]))
 print("Third Quartile: " + str(time_list[int((3*realizations/4) - 1)]))
 
-count = 0
 for i in range(0, realizations):
     if time_list[i] > 15:
         print("P[W<=15]: " + str(i/realizations))
+        cdf_pts.append((15, i/realizations))
         break
+
+for i in range(0, realizations):
+    if time_list[i] > 20:
+        print("P[W<=20]: " + str(i/realizations))
+        cdf_pts.append((20, i/realizations))
+        break
+
+for i in range(0, realizations):
+    if time_list[i] > 30:
+        print("P[W<=30]: " + str(i/realizations))
+        cdf_pts.append((30, i/realizations))
+        break
+
+for i in range(0, realizations):
+    if time_list[i] <= 40:
+        continue
+    print("P[W>40]: " + str(i/realizations))
+    cdf_pts.append((40, i/realizations))
+    break
+
+for i in range(0, realizations):
+    if time_list[i] <= 80:
+        continue
+    print("P[W>80]: " + str(i/realizations))
+    cdf_pts.append((80, i/realizations))
+    break
+
+for i in range(0, realizations):
+    if time_list[i] <= 110:
+        continue
+    print("P[W>110]: " + str(i/realizations))
+    cdf_pts.append((110, i/realizations))
+    break
+
+for i in range(0, realizations):
+    if time_list[i] <= 140:
+        continue
+    print("P[W>140]: " + str(i/realizations))
+    cdf_pts.append((140, i/realizations))
+    break
+
+cdf_pts.append((177.384, 1))
+data_in_array = np.array(cdf_pts)
+tranposed = data_in_array.T
+x, y = tranposed
+plt.plot(x, y)
+plt.ylabel("Cumulitive Probability")
+plt.xlabel("W")
+plt.title("CDF of W")
+plt.show()
