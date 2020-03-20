@@ -117,7 +117,7 @@ data_in_array = np.array(cdf_pts)
 tranposed = data_in_array.T
 x, y = tranposed
 plt.plot(x, y)
-plt.ylabel("Cumulitive Probability")
+plt.ylabel("Cumulative Probability")
 plt.xlabel("W")
 plt.title("CDF of W")
 plt.show()
