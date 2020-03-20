@@ -5,16 +5,16 @@ import sys
 
 sys.setrecursionlimit(10000)
 
-dial_time = 7.626
-busy_signal_time = 4.365
-not_there_time = 35.4
-hang_up_time = 1.32
-average_ring_time = 15.15
+dial_time = 6
+busy_signal_time = 3
+not_there_time = 25
+hang_up_time = 1
+average_ring_time = 12
 realizations = 1000
 r_var = 1
 totalTime = 0
 time_list = []
-cdf_pts = [(0, 0)]
+cdf_pts = [(6, 0)]
 
 def x_i(i):
     if(i == 0):
@@ -87,32 +87,32 @@ for i in range(0, realizations):
 for i in range(0, realizations):
     if time_list[i] <= 40:
         continue
-    print("P[W>40]: " + str(i/realizations))
+    print("P[W>40]: " + str(1 - i/realizations))
     cdf_pts.append((40, i/realizations))
     break
 
 for i in range(0, realizations):
-    if time_list[i] <= 80:
+    if time_list[i] <= 60:
         continue
-    print("P[W>80]: " + str(i/realizations))
-    cdf_pts.append((80, i/realizations))
+    print("P[W>60]: " + str(1 - i/realizations))
+    cdf_pts.append((60, i/realizations))
     break
 
 for i in range(0, realizations):
-    if time_list[i] <= 110:
+    if time_list[i] <= 75:
         continue
-    print("P[W>110]: " + str(i/realizations))
-    cdf_pts.append((110, i/realizations))
+    print("P[W>75]: " + str(1 - i/realizations))
+    cdf_pts.append((75, i/realizations))
     break
 
 for i in range(0, realizations):
-    if time_list[i] <= 140:
+    if time_list[i] <= 100:
         continue
-    print("P[W>140]: " + str(i/realizations))
-    cdf_pts.append((140, i/realizations))
+    print("P[W>100]: " + str(1 - i/realizations))
+    cdf_pts.append((100, i/realizations))
     break
 
-cdf_pts.append((177.384, 1))
+cdf_pts.append((128, 1))
 data_in_array = np.array(cdf_pts)
 tranposed = data_in_array.T
 x, y = tranposed
