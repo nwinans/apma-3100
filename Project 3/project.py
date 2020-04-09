@@ -27,9 +27,14 @@ def x_i(i):
 def u_i(i):
     return x_i(i)/(2**17)
 
-
 def x_from_p (p):
     return math.sqrt(-2*math.log(1-p)/(a*a))
+
+def mean(realizations):
+    sum = 0
+    for i in range(realizations):
+        sum += x_from_p(i)
+    return sum/realizations
 
 circle50 = plt.Circle((0, 0),x_from_p(.5))
 circle70 = plt.Circle((0, 0),x_from_p(.7))
