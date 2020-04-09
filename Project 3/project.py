@@ -17,14 +17,23 @@ FX = np.vectorize(F_X)
 
 plt.plot(x, fX(x))
 plt.plot(x, FX(x))
-plt.show()
+#plt.show()
+
+def x_i(i):
+    if(i == 0):
+        return 1000
+    return (24693*x_i(i-1)+3967)%(2**17)
+
+def u_i(i):
+    return x_i(i)/(2**17)
+
 
 def x_from_p (p):
     return math.sqrt(-2*math.log(1-p)/(a*a))
 
-circle50 = plt.Circle((0, 0) x_from_p(.5))
-circle70 = plt.Circle((0, 0) x_from_p(.7))
-circle90 = plt.Circle((0, 0) x_from_p(.9))
+circle50 = plt.Circle((0, 0),x_from_p(.5))
+circle70 = plt.Circle((0, 0),x_from_p(.7))
+circle90 = plt.Circle((0, 0),x_from_p(.9))
 
 
 print(x_from_p(.5))
