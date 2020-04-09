@@ -17,16 +17,22 @@ FX = np.vectorize(F_X)
 
 plt.plot(x, fX(x))
 plt.plot(x, FX(x))
-plt.show()
+plt.savefig("pdf_and_cdf_3.png")
 
 def x_from_p (p):
     return math.sqrt(-2*math.log(1-p)/(a*a))
 
-circle50 = plt.Circle((0, 0) x_from_p(.5))
-circle70 = plt.Circle((0, 0) x_from_p(.7))
-circle90 = plt.Circle((0, 0) x_from_p(.9))
+circle50 = plt.Circle((0, 0), x_from_p(.5), facecolor='None', edgecolor='r', zorder=1)
+circle70 = plt.Circle((0, 0), x_from_p(.7), facecolor='None', edgecolor='b', zorder=2)
+circle90 = plt.Circle((0, 0), x_from_p(.9), facecolor='None', edgecolor='g', zorder=3)
 
+plt.cla()
+plt.gca().axis('equal')
+plt.gca().set_xlim((-200, 200))
+plt.gca().set_ylim((-200, 200))
 
-print(x_from_p(.5))
-print(x_from_p(.7))
-print(x_from_p(.9))
+plt.gca().add_artist(circle50)
+plt.gca().add_artist(circle70)
+plt.gca().add_artist(circle90)
+
+plt.savefig('circles_3.png')
