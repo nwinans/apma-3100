@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import sys
-sys.setrecursionlimit(1000000)
+sys.setrecursionlimit(1000000000)
 
 tau = 57
 a = 1 / tau
@@ -42,43 +42,53 @@ plt.gca().add_artist(circle90)
 
 plt.savefig('circles_3.png')
 
-def x_i(i):
-    if(i == 0):
-        return 1000
-    return (24693*x_i(i-1)+3967)%(2**17)
+prev_x = -1
 
-def u_i(i):
-    return x_i(i)/(2**17)
+def x_i():
+    global prev_x
+    if(prev_x == -1):
+        prev_x = 1000
+        return prev_x
+    prev_x = (24693*prev_x+3967)%(2**17)
+    return prev_x
+
+def u_i():
+    return x_i()/(2**17)
 
 def M_n(n,start):
     sum = 0
     for i in range(start, start+n):
-        sum += x_from_p(u_i(i)) * u_i(i)
-    return sum
+        u = u_i()
+        s = x_from_p(u)
+        sum += s
+    return sum/n
 
 start = 0
 
 def realizations(sample):
-    global start
+    start = 0
     ret = []
     for i in range(110):
         ret.append(M_n(sample,start))
         start += sample
     return ret
 
-# m_10 = realizations(10)
-# m_30 = realizations(30)
-# m_50 = realizations(50)
-# m_100 = realizations(100)
-# m_150 = realizations(150)
-# m_250 = realizations(250)
-# m_500 = realizations(500)
-# m_1000 = realizations(1000)
+m_10 = realizations(10)
+m_30 = realizations(30)
+m_50 = realizations(50)
+#m_100 = realizations(100)
+#m_150 = realizations(150)
+#m_250 = realizations(250)
+#m_500 = realizations(500)
+#m_1000 = realizations(1000)
+x_n = [10 for _ in range(110)] + [30 for _ in range(110)] + [50 for _ in range(110)]
+y_n = m_10 + m_30 + m_50
+#x = [10 for i in range(110)] + [30 for i in range(110)] + [50 for i in range(110)] + [100 for i in range(110)] + [150 for i in range(110)] + [250 for i in range(110)] + [500 for i in range(110)] + [1000 for i in range(110)]
+#y = m_10 + m_30 + m_50 + m_100 + m_150 + m_250 + m_500 + m_1000
 
-x = [10 for i in range(110)] + [30 for i in range(110)] + [50 for i in range(110)] + [100 for i in range(110)] + [150 for i in range(110)] + [250 for i in range(110)] + [500 for i in range(110)] + [1000 for i in range(110)]
-y = m_10 + m_30 + m_50 + m_100 + m_150 + m_250 + m_500 + m_1000
-plt.plot(x,y)
+print(len(x_n))
+print(len(y_n))
 
-
-
-
+plt.cla()
+plt.scatter(x_n, y_n)
+plt.show()
