@@ -19,6 +19,9 @@ plt.plot(x, fX(x))
 plt.plot(x, FX(x))
 plt.savefig("pdf_and_cdf_3.png")
 
+def x_from_p (p):
+    return math.sqrt(-2*math.log(1-p)/(a*a))
+
 circle50 = plt.Circle((0, 0), x_from_p(.5), facecolor='None', edgecolor='r', zorder=1)
 circle70 = plt.Circle((0, 0), x_from_p(.7), facecolor='None', edgecolor='b', zorder=2)
 circle90 = plt.Circle((0, 0), x_from_p(.9), facecolor='None', edgecolor='g', zorder=3)
@@ -47,6 +50,3 @@ def x_i(i):
 
 def u_i(i):
     return x_i(i)/(2**17)
-
-def x_from_p (p):
-    return math.sqrt(-2*math.log(1-p)/(a*a))
