@@ -42,23 +42,6 @@ plt.gca().add_artist(circle90)
 
 plt.savefig('circles_3.png')
 
-
-
-def M_n(n,start):
-    sum = 0
-    for i in range(start, start+n):
-        sum += x_from_p(u_i(i)) * u_i(i)
-    return sum
-
-def realizations(sample):
-    ret = []
-    start = 0
-    for i in range(110):
-        ret.append(M_n(sample start))
-        start += sample
-    return ret
-
-
 def x_i(i):
     if(i == 0):
         return 1000
@@ -66,5 +49,24 @@ def x_i(i):
 
 def u_i(i):
     return x_i(i)/(2**17)
+
+def M_n(n,start):
+    sum = 0
+    for i in range(start, start+n):
+        sum += x_from_p(u_i(i)) * u_i(i)
+    return sum
+
+start = 0
+
+def realizations(sample):
+    global start
+    ret = []
+    for i in range(110):
+        ret.append(M_n(sample,start))
+        start += sample
+    return ret
+
+
+
 
 
