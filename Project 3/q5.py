@@ -7,4 +7,4 @@ def transform(m_n_array, mu, sigma, n):
     for z in z_n:
         z = (z - mu)/(sigma/sqrt(n))
 
-def estimations:
+#def estimations:
