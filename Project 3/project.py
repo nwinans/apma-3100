@@ -75,7 +75,7 @@ def realizations(sample):
 # m_500 = realizations(500)
 # m_1000 = realizations(1000)
 
-x = [10 for i in range(10)] + [30 for i in range(30)] + [50 for i in range(50)] + [100 for i in range(100)] + [150 for i in range(150)] + [250 for i in range(250)] + [500 for i in range(500)] + [1000 for i in range(1000)]
+x = [10 for i in range(110)] + [30 for i in range(110)] + [50 for i in range(110)] + [100 for i in range(110)] + [150 for i in range(110)] + [250 for i in range(110)] + [500 for i in range(110)] + [1000 for i in range(110)]
 y = m_10 + m_30 + m_50 + m_100 + m_150 + m_250 + m_500 + m_1000
 plt.plot(x,y)
 
