@@ -27,21 +27,6 @@ plt.savefig("pdf_and_cdf_3.png")
 def x_from_p (p):
     return math.sqrt(-2*math.log(1-p)/(a*a))
 
-circle50 = plt.Circle((0, 0), x_from_p(.5), facecolor='None', edgecolor='r', zorder=1)
-circle70 = plt.Circle((0, 0), x_from_p(.7), facecolor='None', edgecolor='b', zorder=2)
-circle90 = plt.Circle((0, 0), x_from_p(.9), facecolor='None', edgecolor='g', zorder=3)
-
-plt.cla()
-plt.gca().axis('equal')
-plt.gca().set_xlim((-200, 200))
-plt.gca().set_ylim((-200, 200))
-
-plt.gca().add_artist(circle50)
-plt.gca().add_artist(circle70)
-plt.gca().add_artist(circle90)
-
-plt.savefig('circles_3.png')
-
 prev_x = -1
 
 def x_i():
@@ -66,7 +51,7 @@ def M_n(n,start):
 start = 0
 
 def realizations(sample):
-    start = 0
+    global start
     ret = []
     for i in range(110):
         ret.append(M_n(sample,start))
@@ -76,19 +61,29 @@ def realizations(sample):
 m_10 = realizations(10)
 m_30 = realizations(30)
 m_50 = realizations(50)
-#m_100 = realizations(100)
-#m_150 = realizations(150)
-#m_250 = realizations(250)
-#m_500 = realizations(500)
-#m_1000 = realizations(1000)
-x_n = [10 for _ in range(110)] + [30 for _ in range(110)] + [50 for _ in range(110)]
-y_n = m_10 + m_30 + m_50
-#x = [10 for i in range(110)] + [30 for i in range(110)] + [50 for i in range(110)] + [100 for i in range(110)] + [150 for i in range(110)] + [250 for i in range(110)] + [500 for i in range(110)] + [1000 for i in range(110)]
-#y = m_10 + m_30 + m_50 + m_100 + m_150 + m_250 + m_500 + m_1000
-
-print(len(x_n))
-print(len(y_n))
+m_100 = realizations(100)
+m_150 = realizations(150)
+m_250 = realizations(250)
+m_500 = realizations(500)
+m_1000 = realizations(1000)
+x_n = [10 for i in range(110)] + [30 for i in range(110)] + [50 for i in range(110)] + [100 for i in range(110)] + [150 for i in range(110)] + [250 for i in range(110)] + [500 for i in range(110)] + [1000 for i in range(110)]
+y_n = m_10 + m_30 + m_50 + m_100 + m_150 + m_250 + m_500 + m_1000
 
 plt.cla()
 plt.scatter(x_n, y_n)
-plt.show()
+plt.savefig("realizations.png")
+
+circle50 = plt.Circle((0, 0), x_from_p(.5), facecolor='None', edgecolor='r', zorder=1)
+circle70 = plt.Circle((0, 0), x_from_p(.7), facecolor='None', edgecolor='b', zorder=2)
+circle90 = plt.Circle((0, 0), x_from_p(.9), facecolor='None', edgecolor='g', zorder=3)
+
+plt.cla()
+plt.gca().axis('equal')
+plt.gca().set_xlim((-200, 200))
+plt.gca().set_ylim((-200, 200))
+
+plt.gca().add_artist(circle50)
+plt.gca().add_artist(circle70)
+plt.gca().add_artist(circle90)
+
+plt.savefig('circles_3.png')
