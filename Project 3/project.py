@@ -6,7 +6,7 @@ sys.setrecursionlimit(1000000000)
 
 tau = 57
 a = 1 / tau
-x = np.linspace(0, 200, 500)
+x = np.linspace(0, 250, 500)
 
 def f_X (x):
     return a*a*x*math.exp(-a*a*x*x/2)
@@ -20,9 +20,18 @@ def x_from_p(p):
 fX = np.vectorize(f_X)
 FX = np.vectorize(F_X)
 
-plt.plot(x, fX(x))
-plt.plot(x, FX(x))
-plt.savefig("pdf_and_cdf_3.png")
+plt.plot(x, fX(x), label="f_X(x)")
+plt.ylabel('f_X(x)')
+plt.xlabel("inches")
+plt.title("PDF of X")
+plt.savefig("pdf_3.png")
+
+plt.cla()
+plt.plot(x, FX(x), label="F_X(x)")
+plt.title("CDF of X")
+plt.ylabel("F_X(x)")
+plt.xlabel("inches")
+plt.savefig('cdf_3.png')
 
 def x_from_p (p):
     return math.sqrt(-2*math.log(1-p)/(a*a))
@@ -75,7 +84,7 @@ plt.savefig("realizations.png")
 
 circle50 = plt.Circle((0, 0), x_from_p(.5), facecolor='None', edgecolor='r', zorder=1)
 circle70 = plt.Circle((0, 0), x_from_p(.7), facecolor='None', edgecolor='b', zorder=2)
-circle90 = plt.Circle((0, 0), x_from_p(.9), facecolor='None', edgecolor='g', zorder=3)
+circle90 = plt.Circle((0, 0), x_from_p(.9), facecolor='None', edgecolor='black', zorder=3)
 
 plt.cla()
 plt.gca().axis('equal')
@@ -85,5 +94,9 @@ plt.gca().set_ylim((-200, 200))
 plt.gca().add_artist(circle50)
 plt.gca().add_artist(circle70)
 plt.gca().add_artist(circle90)
-
+origin = plt.scatter([0], [0])
+plt.legend([circle50, circle70, circle90], ['50% probability', '70% probability', '90% probability'])
+plt.xlabel("inches")
+plt.ylabel("inches")
+plt.title("Probability of Newspaper Dropping Within Range")
 plt.savefig('circles_3.png')
